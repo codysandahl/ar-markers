@@ -12,5 +12,5 @@ This is an [Ionic](https://ionicframework.com/) app that integrates [AR.js](http
 4. Start the app
 
     ```ionic serve```
-5. Images of the barcode tags are in reference/barcodes/
+5. Images of the barcode tags are [here](reference/barcodes/) or get more on [GitHub](https://github.com/nicolocarpignoli/artoolkit-barcode-markers-collection)
 
