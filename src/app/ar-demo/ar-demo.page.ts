@@ -12,4 +12,8 @@ export class ArDemoPage implements OnInit {
   ngOnInit() {
   }
 
+  public testButton() {
+    console.log("TEST BUTTON");
+  }
+
 }

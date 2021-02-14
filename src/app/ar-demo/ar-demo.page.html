@@ -6,4 +6,10 @@
 
 <ion-content [fullscreen]="true">
   <iframe src="/assets/ar-demo-scene.html"></iframe>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="testButton();">
+      <ion-icon name="refresh">Test</ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
