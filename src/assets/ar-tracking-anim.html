@@ -6,28 +6,34 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <script src="/assets/components/dragon.js"></script>
+    <script src="/assets/components/hunt.js"></script>
+    <script src="/assets/components/tracker.js"></script>
     
     <body style='margin : 0px; overflow: hidden;'>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <!-- NOTE: the black barcode images must have a white border around them to provide enough contrast for detection-->
         <a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3_HAMMING63;'>
 
+        <!-- load 3d models -->
         <a-assets>
-            <a-asset-item id="fox" src="/assets/models/fox/Fox.gltf"></a-asset-item>
-            <a-asset-item id="dragon" src="/assets/models/dragon/dragon.gltf"></a-asset-item>
+            <a-asset-item id="foxModel" src="/assets/models/fox/Fox.gltf"></a-asset-item>
+            <a-asset-item id="dragonModel" src="/assets/models/dragon/dragon.gltf"></a-asset-item>
         </a-assets>
 
-        <a-marker type='barcode' value='7'>
-            <a-entity
-              gltf-model="#fox"
-              scale="0.01 0.01 0.01"
-              >
-            </a-entity>
-        </a-marker>
+        <!-- define entities (visible objects) -->
+        <!-- tracker = follow a marker in 3d space, but don't disappear if it disappears -->
+        <!-- hunt = walk towards and look at a target if it is found and visible -->
+        <a-entity id="fox" gltf-model="#foxModel" scale="0.01 0.01 0.01" visible="false" 
+            tracker="marker: #foxMarker"
+        ></a-entity>
+        <a-entity id="dragon" gltf-model="#dragonModel" scale="0.03 0.03 0.03" visible="false" animation-mixer="clip: none;" 
+            tracker="marker: #dragonMarker; rotation: false;"
+            hunt="target: #fox;"
+        ></a-entity>
 
-        <a-marker id="dragon-marker" type='barcode' value='6' dragon></a-marker>
+        <!-- define markers for augmented reality spacial tracking -->
+        <a-marker id="foxMarker" type='barcode' value='7'"></a-marker>
+        <a-marker id="dragonMarker" type='barcode' value='6'></a-marker>
 
         <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
         <a-entity camera></a-entity>
